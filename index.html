@@ -11,6 +11,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Candal&family=Galindo&family=Yusei+Magic&display=swap"
         rel="stylesheet">
+    <script type="text/javascript" src="./src/soundwave.ts" defer></script>
+    <script type="text/javascript" src="./src/main.ts" defer></script>
     <title>Efecto Doppler</title>
 </head>
 
@@ -47,8 +49,9 @@
             </form>
 
             <div>
-                <button type="button" id="btn-volver">< volver</button>
-                <button type="button" id="btn-enviar">usar datos</button>
+                <button type="button" id="btn-volver">
+                    < volver</button>
+                        <button type="button" id="btn-enviar">usar datos</button>
             </div>
 
 
@@ -59,7 +62,7 @@
                 <p>Medio: <span>aire</span></h2>
             </div>
             <section>
-
+                <canvas id="sim-canvas" style="background-color: black;"></canvas>
             </section>
         </div>
     </main>
