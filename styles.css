@@ -21,10 +21,12 @@ main {
 
 aside {
     display: flex;
+    justify-content: flex-end;
     flex-direction: column;
     width: 30%;
     padding: 0 2rem;
     gap: 1rem;
+    height: 100%;
     font-weight: lighter;
 }
 
@@ -67,6 +69,7 @@ section {
 .input-container {
     display: flex;
     flex-direction: column;
+    gap: .5rem;
 }
 
 .title-container {
@@ -144,7 +147,7 @@ button:hover {
 }
 
 .form-title {
-    position: relative;
+    position: absolute;
     top: -30px;
     left: 15%;
     transform: translateX(-50%);
@@ -263,6 +266,7 @@ input[type="range"]:active {
     padding: 1rem;
     border-radius: 100%;
     transition: all 0.3s ease;
+    border: 2px solid rgb(27, 26, 26);
 }
 
 /* Íconos de los lados */
