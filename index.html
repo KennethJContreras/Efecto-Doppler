@@ -11,7 +11,25 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Candal&family=Galindo&family=Yusei+Magic&display=swap"
         rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0&icon_names=fast_forward" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=play_arrow" />
+    <script src="https://kit.fontawesome.com/8b44041adf.js" crossorigin="anonymous"></script>
+
+
     <title>Efecto Doppler</title>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 300,
+                'GRAD' 0,
+                'opsz' 48
+        }
+    </style>
 </head>
 
 <body>
@@ -47,8 +65,9 @@
             </form>
 
             <div>
-                <button type="button" id="btn-volver">< volver</button>
-                <button type="button" id="btn-enviar">usar datos</button>
+                <button type="button" id="btn-volver">
+                    < volver</button>
+                        <button type="button" id="btn-enviar">usar datos</button>
             </div>
 
 
@@ -64,8 +83,26 @@
         </div>
     </main>
     <footer>
-
+        <div id="panel-datos">
+            <p>Ve = 20 m/s</p>
+            <p>Do = 5m</p>
+            <p>F = 120 Hz</p>
+            <p>Medio = Aire</p>
+        </div>
+        <div id="panel-control">
+            <div class="icon"> <i class="fa-solid fa-backward"></i> </div>
+            <div class="icon"> <i class="fa-solid fa-play"></i> </div>
+            <div class="icon"> <i class="fa-solid fa-forward"></i> </div>
+        </div>
+        <div id="panel-volumen">
+            <label for="volumen"><i class="fa-solid fa-volume-high"></i></label>
+            <input type="range" id="volumen" min="0" max="100" value="50">
+        </div>
+        <div id="visualizacion">
+            Visualización de la onda
+        </div>
     </footer>
+    
 
 </body>
 
