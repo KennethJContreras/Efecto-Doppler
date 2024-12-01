@@ -11,6 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Candal&family=Galindo&family=Yusei+Magic&display=swap"
         rel="stylesheet">
+    <script type="text/javascript" src="./src/vehicle.ts" defer></script>
     <script type="text/javascript" src="./src/soundwave.ts" defer></script>
     <script type="text/javascript" src="./src/main.ts" defer></script>
     <title>Efecto Doppler</title>
@@ -19,24 +20,20 @@
 <body>
     <main class="">
         <aside>
-
             <form>
                 <p class="form-title">Variables</p>
                 <div class="input-container">
                     <label for="velocidad">Velocidad del emisor (m/s):</label>
                     <input type="range" id="velocidad">
                 </div>
-
                 <div class="input-container">
                     <label for="">Posicion del observador (m):</label>
                     <input type="range" id="posicion">
                 </div>
-
                 <div class="input-container">
                     <label for="">Frecuencia inicial de la onda (Hz)</label>
                     <input type="range" id="frecuencia">
                 </div>
-
                 <div class="input-container">
                     <label for="medio">Medio de propagacion:</label>
                     <select name="" id="medio">
@@ -45,16 +42,17 @@
                         <option value="vacio">Vacio</option>
                     </select>
                 </div>
-
+                <div>
+                    <!-- <button type="button" id="btn-volver">
+                        <a href="/index.html" style="text-decoration: none; color: white;">
+                            Regresar a Inicio
+                        </a>
+                    </button> -->
+                    <!-- <button type="button" id="btn-enviar">
+                        Usar Datos
+                    </button> -->
+                </div>
             </form>
-
-            <div>
-                <button type="button" id="btn-volver">
-                    < volver</button>
-                        <button type="button" id="btn-enviar">usar datos</button>
-            </div>
-
-
         </aside>
         <div>
             <div class="title-container">
@@ -62,7 +60,9 @@
                 <p>Medio: <span>aire</span></h2>
             </div>
             <section>
-                <canvas id="sim-canvas" style="background-color: black;"></canvas>
+                <div id="street"></div>
+                <div id="streetline"></div>
+                <canvas id="sim-canvas"></canvas>
             </section>
         </div>
     </main>

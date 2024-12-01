@@ -7,18 +7,18 @@ class SoundWave {
   radius: number = 0;
   frequency: number = 0;
 
-  constructor (x: number, y: number, color: string, frequency: number) {
+  constructor(x: number, y: number, color: string, frequency: number) {
     this.x = x;
     this.y = y;
     this.color = color;
     this.frequency = frequency;
   }
 
-  update() {
-    this.radius += 3;
+  update(radiusIncrement) {
+    this.radius += radiusIncrement;
   }
 
-  draw (ctx: CanvasRenderingContext2D) {
+  draw(ctx: CanvasRenderingContext2D) {
     ctx.beginPath();
     ctx.lineWidth = 3;
     ctx.strokeStyle = this.color;
