@@ -2,104 +2,114 @@ const velocidadSpan = document.getElementById("footer-velocidad");
 const posicionSpan = document.getElementById("footer-posicion");
 const frecuenciaSpan = document.getElementById("footer-frecuencia");
 const medioSpan = document.getElementById("footer-medio");
+const titulo = document.getElementById("medio-title");
 
 const inputVelocidad = document.getElementById("velocidad");
 const inputPosicion = document.getElementById("posicion");
 const inputFrecuencia = document.getElementById("frecuencia");
 
-const minVelocidadBallena = 1;
-const maxVelocidadBallena = 6;
-const minFreqBallena = 10;
-const maxFreqBallena = 50;
+const simulador = document.getElementById("simulador");
+const recept = document.getElementById("receptor");
+const emisor = document.getElementById("emisor");
+const currentMonth = new Date().getMonth();
+let medioIndex = 0; // Índice para identificar el medio
 
-const minVelocidadAvion = 70;
-const maxVelocidadAvion = 250;
-const minFreqAvion = 20;
-const maxFreqAvion = 20000;
-
-const minVelocidadAmbulancia = 22;
-const maxVelocidadAmbulancia = 33;
-const minFreqAmbulancia = 500;
-const maxFreqAmbulancia = 6000;
+const configuracionesMedios = {
+    Ballena: {
+        minVelocidad: 1,
+        maxVelocidad: 6,
+        minFrecuencia: 10,
+        maxFrecuencia: 50,
+        posicionX: 100,
+        pocisionY: 0
+    },
+    Avion: {
+        minVelocidad: 22,
+        maxVelocidad: 250,
+        minFrecuencia: 20,
+        maxFrecuencia: 20000,
+        posicionX: 0,
+        pocisionY: 0
+    },
+    Ambulancia: {
+        minVelocidad: 22,
+        maxVelocidad: 250,
+        minFrecuencia: 500,
+        maxFrecuencia: 6000,
+        posicionX: 100,
+        pocisionY: 60
+    },
+    Estrella: {
+        minVelocidad: 50000,
+        maxVelocidad: 300000,
+        minFrecuencia: 3000000000000,
+        maxFrecuencia: 1000000000000000000,
+        posicionX: 15,
+        pocisionY: 0
+    }
+};
 
 
 document.getElementById("medio").addEventListener("change", function () {
-    medioSpan.textContent = this.value;
-    console.log(this.value);
+    const medio = this.value; // Obtiene el valor seleccionado
+    medioSpan.textContent = medio;
+    titulo.textContent = medio;
 
-    switch (this.value) {
+    switch (medio) {
         case "Aire":
-            inputVelocidad.setAttribute("max", maxVelocidadAvion);
-            inputVelocidad.setAttribute("min", minVelocidadAvion);
-            inputFrecuencia.setAttribute("max", maxFreqAvion);
-            inputFrecuencia.setAttribute("min", minFreqAvion);
-            inputVelocidad.value = minVelocidadAvion;
-            inputFrecuencia.value = minFreqAvion;
-            velocidadSpan.textContent = minVelocidadAvion;
-            frecuenciaSpan.textContent = minFreqAvion;
-
+            medioIndex = 0;
+            configuracion = configuracionesMedios.Ambulancia;
             break;
         case "Agua":
-            inputVelocidad.setAttribute("max", maxVelocidadBallena);
-            inputVelocidad.setAttribute("min", minVelocidadBallena);
-            inputFrecuencia.setAttribute("max", maxFreqBallena);
-            inputFrecuencia.setAttribute("min", minFreqBallena);
-            inputVelocidad.value = minVelocidadBallena;
-            inputFrecuencia.value = minFreqBallena;
-            velocidadSpan.textContent = minVelocidadBallena;
-            frecuenciaSpan.textContent = minFreqBallena;
+            medioIndex = 1;
+            configuracion = configuracionesMedios.Ballena;
             break;
         case "Vacio":
-            inputVelocidad.setAttribute("max", maxVelocidadAmbulancia);
-            inputVelocidad.setAttribute("min", minVelocidadAmbulancia);
-            inputFrecuencia.setAttribute("max", maxFreqAmbulancia);
-            inputFrecuencia.setAttribute("min", minFreqAmbulancia);
-            inputVelocidad.value = minVelocidadAmbulancia;
-            inputFrecuencia.value = minFreqAmbulancia;
-            velocidadSpan.textContent = minVelocidadAmbulancia;
-            frecuenciaSpan.textContent = minFreqAmbulancia;
+            medioIndex = 2;
+            configuracion = configuracionesMedios.Estrella;
             break;
     }
 
-    document.getElementById("medio").addEventListener("change", function () {
-    medioSpan.textContent = this.value;
-    console.log(this.value);
-
-    switch (this.value) {
-        case "Aire":
-            inputVelocidad.setAttribute("max", maxVelocidadAvion);
-            inputVelocidad.setAttribute("min", minVelocidadAvion);
-            inputFrecuencia.setAttribute("max", maxFreqAvion);
-            inputFrecuencia.setAttribute("min", minFreqAvion);
-            velocidadSpan.textContent = minVelocidadAvion;
-            frecuenciaSpan.textContent = minFreqAvion;
-            break;
-        case "Agua":
-            inputVelocidad.setAttribute("max", maxVelocidadBallena);
-            inputVelocidad.setAttribute("min", minVelocidadBallena);
-            inputFrecuencia.setAttribute("max", maxFreqBallena);
-            inputFrecuencia.setAttribute("min", minFreqBallena);
-            velocidadSpan.textContent = minVelocidadBallena;
-            frecuenciaSpan.textContent = minFreqBallena;
-            break;
-        case "Vacio":
-            inputVelocidad.setAttribute("max", maxVelocidadAmbulancia);
-            inputVelocidad.setAttribute("min", minVelocidadAmbulancia);
-            inputFrecuencia.setAttribute("max", maxFreqAmbulancia);
-            inputFrecuencia.setAttribute("min", minFreqAmbulancia);
-            velocidadSpan.textContent = minVelocidadAmbulancia;
-            frecuenciaSpan.textContent = minFreqAmbulancia;
-            break;
+    cambiarMedio(medioIndex);
+    if (configuracion) {
+        configurarInputs(configuracion);
     }
 
-    posicionSpan.textContent = 0;
-})
+    posicionSpan.textContent = 0; // Restablecer posición
+});
 
-})
+// Función para configurar los inputs
+function configurarInputs({ minVelocidad, maxVelocidad, minFrecuencia, maxFrecuencia, posicionX, pocisionY }) {
+    inputVelocidad.setAttribute("min", minVelocidad);
+    inputVelocidad.setAttribute("max", maxVelocidad);
+    inputVelocidad.value = minVelocidad;
+    velocidadSpan.textContent = minVelocidad;
+    configurarInputs2({ minVelocidad, maxVelocidad, minFrecuencia, maxFrecuencia, posicionX, pocisionY })
+}
 
+function configurarInputs2({ minFrecuencia, maxFrecuencia, posicionX, pocisionY }) {
+    inputFrecuencia.setAttribute("min", minFrecuencia);
+    inputFrecuencia.setAttribute("max", maxFrecuencia);
+    inputFrecuencia.value = minFrecuencia;
+
+    frecuenciaSpan.textContent = minFrecuencia;
+    emisor.style.left = posicionX + '%';
+    emisor.style.top = pocisionY + '%';
+}
 
 inputVelocidad.addEventListener("input", function () {
-    velocidadSpan.textContent = this.value;
+    velocidad = this.value;
+    velocidadSpan.textContent = velocidad;
+    if (medioIndex == 0 && velocidad > 33) {
+        emisor.style.backgroundImage = `url(${emisorImages[3]})`;
+        configuracion = configuracionesMedios.Avion;
+        configurarInputs2(configuracion);
+    } else if(medioIndex == 0 && velocidad <= 33){
+        emisor.style.backgroundImage = `url(${emisorImages[0]})`;
+        configuracion = configuracionesMedios.Ambulancia;
+        configurarInputs2(configuracion);
+    }
+    
 })
 
 inputPosicion.addEventListener("input", function () {
@@ -112,15 +122,23 @@ inputFrecuencia.addEventListener("input", function () {
 
 // Arrays de imágenes para cada elemento
 const emisorImages = [
+    "./img/aire/ambulance.png",
     "./img/agua/whale.png",
-    "./img/agua/whale.png",
-    "./img/agua/whale.png"
+    "./img/espacio/star.png",
+    "./img/aire/airplane.png"
 ];
 
 const receptorImages = [
+    "./img/aire/receptor.png",
     "./img/agua/buzo.png",
-    "./img/agua/buzo.png",
-    "./img/agua/buzo.png"
+    "./img/espacio/astronaut.png"
+];
+
+const bgImages = [
+    "./img/aire/casa.png",
+    "./img/agua/ocean-bg.jpg",
+    "./img/espacio/space-bg.jpg",
+    "./img/aire/nieve.png"
 ];
 
 // Función para seleccionar una imagen aleatoria
@@ -129,10 +147,10 @@ function getRandomImage(images) {
     return images[randomIndex];
 }
 
-// Asignar imágenes a los divs
+/* // Asignar imágenes a los divs
 document.getElementById("emisor").style.backgroundImage = `url(${getRandomImage(emisorImages)})`;
 document.getElementById("receptor").style.backgroundImage = `url(${getRandomImage(receptorImages)})`;
-
+ */
 const receptor = document.getElementById("receptor");
 const rangeInput = document.getElementById("posicion");
 
@@ -154,3 +172,13 @@ rangeInput.addEventListener("input", function () {
     }
 });
 
+cambiarMedio(0);
+configuracion = configuracionesMedios.Ambulancia;
+configurarInputs(configuracion);
+
+function cambiarMedio(medio) {
+    const isDecember = currentMonth === 11; // Verifica si es diciembre
+    simulador.style.backgroundImage = `url(${medio === 0 ? (isDecember ? bgImages[3] : bgImages[0]) : bgImages[medio]})`;
+    recept.style.backgroundImage = `url(${receptorImages[medio]})`;
+    emisor.style.backgroundImage = `url(${emisorImages[medio]})`;
+}

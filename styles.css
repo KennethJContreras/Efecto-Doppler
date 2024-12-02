@@ -16,13 +16,14 @@ main {
     align-items: center;
     padding: 1.5rem 1rem;
     background-color: #6fa8dc;
-    height: 70vh;
+    height: 79vh;
 }
 
 aside {
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
+    margin-bottom: 60px;
     width: 30%;
     padding: 0 2rem;
     gap: 1rem;
@@ -41,7 +42,7 @@ form {
     display: flex;
     position: relative;
     flex-direction: column;
-    gap: .8rem;
+    gap: 1.2rem;
     padding: 2rem 1rem;
     border: 2px solid #3333339e;    
     border-radius: 5px;
@@ -173,6 +174,8 @@ footer {
     width: 100%;
     box-sizing: border-box;
     border-top: 2px solid white;
+    position: relative;  /* Asegura que el footer esté en el pie de la página */
+    bottom: 0;
 }
 
 #panel-datos {
@@ -308,7 +311,6 @@ input[type="range"]:active {
 }
 
 #simulador {
-    background-image: url("./img/agua/ocean-bg.jpg");
     background-size: cover;
     background-position:center;
     position: relative;
@@ -322,16 +324,14 @@ input[type="range"]:active {
     background-position: center;
 }
 
-#emisor {
+#receptor {
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
     right: 0;
 }
 
-#receptor {
+#emisor {
     position: absolute;
-    top: 0;
-    left: 50%;
     transform: translateX(-50%);
 }
 
